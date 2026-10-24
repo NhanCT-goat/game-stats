@@ -19,6 +19,7 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    * }
    */
   private Map<String, Integer> gameCounts;
+  private Map<String, Integer> scores;
 
   // For some waves you will need to add more private instance variables here!
 
@@ -26,21 +27,28 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
 
   public MapGameStatsCalculator(Scanner scoreInput) {
     gameCounts = new HashMap<>();
+    scores = new HashMap<>();
 
     while(scoreInput.hasNext()) {
       String name = scoreInput.next();
       int score = scoreInput.nextInt();
       
-         for (String game : gameCounts.keySet()) {
-        if (!gameCounts.containsKey(game)){
-          gameCounts.put(game, 1);
+        
+        if (!gameCounts.containsKey(name)){
+          gameCounts.put(name, 1);
+        
         }else{
 
-        int currentGC = gameCounts.get(game);
+        int currentGC = gameCounts.get(name);
         int newGC = currentGC + 1;
-        gameCounts.put(game, newGC);
+        gameCounts.put(name, newGC);
        }
-       }
+       if (!scores.containsKey(name)){
+            scores.put(name, score);
+          }else if (score < scores.get(name)){
+            scores.put(name, score);
+          }
+       
       // TODO: add logic here to use the name and score to fill your map(s)!
 
     }
@@ -74,10 +82,11 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
   @Override
   public int highScore(String person) {
     // TODO: remove this exception once you have implemented your method!
-    throw new UnsupportedOperationException("Unimplemented method 'highScore'");
+    //throw new UnsupportedOperationException("Unimplemented method 'highScore'");
 
     // Uncomment this and have it as your first line once you remove the UnsupportedOperationException
-    //checkPerson(person);
+    checkPerson(person);
+    return scores.get(person);
   }
 
   /**
