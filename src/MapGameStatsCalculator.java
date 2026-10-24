@@ -98,14 +98,26 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    * @return the name of the person with the highest score
    * @throws NoSuchElementException if there is no score data
    */
+  
   @Override
   public String highestScorer() {
     // TODO: remove this exception once you have implemented your method!
-    throw new UnsupportedOperationException("Unimplemented method 'highestScorer'");
+    // throw new UnsupportedOperationException("Unimplemented method 'highestScorer'");
 
     // Uncomment this and have it as your first line once you remove the UnsupportedOperationException
-    //checkScoreData();
+    checkScoreData();
+    String players = "";
+    int playerScore = 0;
+  for (String player : scores.keySet()){
+    if (scores.get(player) > playerScore){
+      playerScore = scores.get(player);
+      players = player;
+     
+    }
   }
+  return players;
+  
+}
 
   /**
    * Returns the average score a person has gotten.
